@@ -1,4 +1,4 @@
-# ud867: Gradle for Android and Java
+# BuildItBigger (ud867): Gradle for Android and Java
 
 Welcome to the demos and exercises accompanying ud867 at Udacity!
 
