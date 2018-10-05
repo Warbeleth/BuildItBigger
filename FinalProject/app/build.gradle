@@ -47,4 +47,8 @@ dependencies {
     })
 
     testImplementation 'junit:junit:4.12'
+
+    implementation fileTree(dir: 'libs', include: ['fun.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation project(':fun')
 }
