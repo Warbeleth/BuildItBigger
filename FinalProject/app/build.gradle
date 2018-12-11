@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
-        minSdkVersion 16
+        minSdkVersion 27
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -51,4 +51,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['fun.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation project(':fun')
+
+    implementation project(':aar')
 }
