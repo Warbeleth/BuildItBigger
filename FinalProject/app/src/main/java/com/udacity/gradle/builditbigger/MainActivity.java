@@ -51,18 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public void tellJoke(View view) {
 
         //Call the AsyncEndpoint
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Bob"));
-
-
-        //JokeClass test = new JokeClass();
-
-        //Toast.makeText(this, test.TellJoke(), Toast.LENGTH_SHORT).show();
-
-        //Launch library activity
-        //Intent intent = new Intent(this, JokeActivity.class);
-        //intent.putExtra(JokeActivity.ACTIVITY_JOKE_EXTRA, test.TellJoke());
-
-        //this.startActivity(intent);
+        new EndpointsAsyncTask().execute(this);
     }
 
 
