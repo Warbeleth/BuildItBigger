@@ -3,7 +3,6 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v4.util.Pair;
 import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -18,6 +17,12 @@ import java.io.IOException;
 class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private OnTaskCompleted delegate;
+
+    public EndpointsAsyncTask(Context context, OnTaskCompleted delegate) {
+        this.context = context;
+        this.delegate = delegate;
+    }
 
     @Override
     protected String doInBackground(Context... params) {
@@ -39,8 +44,6 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
             myApiService = builder.build();
         }
 
-        context = params[0];
-
         try {
             return myApiService.tellJoke().execute().getData();
         } catch (IOException e) {
@@ -50,12 +53,22 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
-        //Launch library activity
-        Intent intent = new Intent(context, JokeActivity.class);
-        intent.putExtra(JokeActivity.ACTIVITY_JOKE_EXTRA, result);
+        if(delegate != null)
+            delegate.onTaskCompleted(result);
 
-        context.startActivity(intent);
+        if(context != null) {
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+            //Launch library activity
+            Intent intent = new Intent(context, JokeActivity.class);
+            intent.putExtra(JokeActivity.ACTIVITY_JOKE_EXTRA, result);
+
+            context.startActivity(intent);
+        }
+    }
+
+    public interface OnTaskCompleted {
+        void onTaskCompleted(String result);
     }
 }
