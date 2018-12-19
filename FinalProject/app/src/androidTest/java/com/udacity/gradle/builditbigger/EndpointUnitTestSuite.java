@@ -40,14 +40,5 @@ public class EndpointUnitTestSuite {
 
         ViewInteraction check = onView(withId(R.id.tv_joke_to_display)).check(matches(not(withText(""))));
         ViewInteraction check2 = onView(withId(R.id.tv_joke_to_display)).check(matches(not((withText(containsString("failed to connect"))))));
-
-        /*
-        new EndpointsAsyncTask(null, new EndpointsAsyncTask.OnTaskCompleted() {
-            @Override
-            public void onTaskCompleted(String result) {
-                assertThat(result, not(""));
-            }
-        }).execute();
-        */
     }
 }
